@@ -1,0 +1,53 @@
+
+<html>
+<head>
+<!-- Load d3.js and c3.js -->
+<link href="c3.css" rel="stylesheet" type="text/css">
+<script src="d3.min.js" charset="utf-8"></script>
+<script src="c3.min.js"></script>
+<meta charset="utf-8">
+<title>Energie-Monitor</title>
+</head>
+<body onload="setInterval('auto_reload();', 3000)">
+<center>
+<div id="chart1"></div>
+<script>
+
+var chart = c3.generate({
+	size: {
+        width: 750
+    },
+    bindto: '#chart1',
+    data: {url: 'live.php',
+            mimeType: 'json'
+		},
+		  point: {
+        show: false
+    },
+		axis: {
+        x: {
+		
+				label: {
+                show: false
+            }
+        },
+        y: {
+		        label: {
+                text: 'W',
+                position: 'outer-middle'
+            }
+        }
+		},
+	legend: {
+        show: false	
+	}
+});
+
+function auto_reload()
+{
+	chart.load({url: 'live.php', mimeType: 'json'});
+}
+</script>
+</center>
+</body>
+</html>
